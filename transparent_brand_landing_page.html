@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Everyday Tee — Full Price Breakdown</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --sand: #F5F1EB;
+    --bark: #2C2419;
+    --moss: #4A5E3A;
+    --clay: #B5714A;
+    --cream: #FBF8F3;
+    --stone: #8C8880;
+    --divider: rgba(44,36,25,0.12);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--bark);
+    min-height: 100vh;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 2.5rem;
+    border-bottom: 0.5px solid var(--divider);
+    background: var(--cream);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .wordmark {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+    color: var(--bark);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+    color: var(--stone);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 85vh;
+  }
+
+  .hero-visual {
+    background: var(--sand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+  }
+
+  .tee-svg { width: 65%; max-width: 280px; }
+
+  .hero-content {
+    padding: 4rem 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--moss);
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem;
+    line-height: 1.05;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .tagline {
+    font-size: 1rem;
+    color: var(--stone);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    max-width: 380px;
+  }
+
+  .price-display {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .price-note {
+    font-size: 0.8rem;
+    color: var(--stone);
+    margin-bottom: 2rem;
+  }
+
+  .swatches {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .swatch {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.15s;
+  }
+
+  .swatch.active { border-color: var(--bark); }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--bark);
+    color: var(--cream);
+    padding: 1rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 1rem;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .btn-primary:hover { background: #1a1510; }
+
+  .certifications {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  .cert {
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border: 0.5px solid var(--divider);
+    color: var(--stone);
+  }
+
+  /* Cost breakdown section */
+  .breakdown-section {
+    padding: 5rem 2.5rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-header p {
+    color: var(--stone);
+    font-size: 0.95rem;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .cost-bar-container {
+    margin-bottom: 3rem;
+  }
+
+  .cost-bar {
+    display: flex;
+    height: 12px;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .cost-bar-segment {
+    height: 100%;
+    transition: flex 0.4s ease;
+  }
+
+  .cost-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--divider);
+    border: 0.5px solid var(--divider);
+  }
+
+  .cost-item {
+    background: var(--cream);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .cost-item-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .cost-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .cost-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  .cost-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+
+  .cost-sub {
+    font-size: 0.78rem;
+    color: var(--stone);
+    line-height: 1.4;
+  }
+
+  /* Why we charge this */
+  .philosophy {
+    background: var(--sand);
+    padding: 5rem 2.5rem;
+  }
+
+  .philosophy-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .philosophy h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .philosophy-item h3 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .philosophy-item p {
+    font-size: 0.875rem;
+    color: var(--stone);
+    line-height: 1.65;
+  }
+
+  /* Footer */
+  footer {
+    padding: 2rem 2.5rem;
+    border-top: 0.5px solid var(--divider);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--stone);
+  }
+
+  @media (max-width: 680px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-visual { min-height: 40vh; }
+    .hero-content { padding: 2.5rem 1.5rem; }
+    h1 { font-size: 2.2rem; }
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .philosophy-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wordmark">Transparent</div>
+  <ul class="nav-links">
+    <li><a href="#">Our process</a></li>
+    <li><a href="#">The breakdown</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-visual">
+    <svg class="tee-svg" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M60 20 L10 60 L35 80 L35 200 L165 200 L165 80 L190 60 L140 20 L120 40 Q100 50 80 40 Z"
+        fill="#D6CFC4" stroke="#BEB7AC" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M80 40 Q100 50 120 40" stroke="#BEB7AC" stroke-width="1" fill="none"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="eyebrow">Full transparency</div>
+    <h1>The Everyday Tee</h1>
+    <p class="tagline">We show you exactly where every dollar goes. No markups hidden in silence. No mystery margin. Just a well-made shirt and an honest number.</p>
+
+    <div class="price-display">$52.00</div>
+    <div class="price-note">Includes all costs — see the breakdown below</div>
+
+    <div class="swatches">
+      <div class="swatch active" style="background: #F5F1EB; border: 1.5px solid #c0b9af;" title="Salt"></div>
+      <div class="swatch" style="background: #2C2419;" title="Carbon"></div>
+      <div class="swatch" style="background: #EDE6D6;" title="Parchment"></div>
+      <div class="swatch" style="background: #6B7A52;" title="Lichen"></div>
+      <div class="swatch" style="background: #B5714A;" title="Ember"></div>
+    </div>
+
+    <button class="btn-primary">Pre-order now</button>
+
+    <div class="certifications">
+      <span class="cert">GRS Recycled</span>
+      <span class="cert">Fair Trade</span>
+      <span class="cert">Carbon Neutral Shipping</span>
+      <span class="cert">B Corp Pending</span>
+    </div>
+  </div>
+</section>
+
+<section class="breakdown-section">
+  <div class="section-header">
+    <h2>Where $52 actually goes</h2>
+    <p>Most apparel brands mark up 5–10× and keep the math private. We don't. Here's every dollar, in full.</p>
+  </div>
+
+  <div class="cost-bar-container">
+    <div class="cost-bar">
+      <div class="cost-bar-segment" style="flex: 8.7; background: #6B7A52;"></div>
+      <div class="cost-bar-segment" style="flex: 5.1; background: #4A5E3A;"></div>
+      <div class="cost-bar-segment" style="flex: 8.6; background: #B5714A;"></div>
+      <div class="cost-bar-segment" style="flex: 14.6; background: #2C2419;"></div>
+      <div class="cost-bar-segment" style="flex: 15; background: #8C8880;"></div>
+    </div>
+
+    <div class="cost-items">
+      <div class="cost-item">
+        <div class="cost-item-header">
+          <div class="cost-dot" style="background: #6B7A52;"></div>
+          <div class="cost-label">Materials</div>
+        </div>
+        <div class="cost-amount">$8.70</div>
+        <div class="cost-sub">Recycled cotton blend (GRS certified), sourced via Recover Brands, Charlotte NC</div>
+      </div>
+
+      <div class="cost-item">
+        <div class="cost-item-header">
+          <div class="cost-dot" style="background: #4A5E3A;"></div>
+          <div class="cost-label">Labour</div>
+        </div>
+        <div class="cost-amount">$5.10</div>
+        <div class="cost-sub">Cut-and-sew production. Fair Trade certified wages, Southeast US facility</div>
+      </div>
+
+      <div class="cost-item">
+        <div class="cost-item-header">
+          <div class="cost-dot" style="background: #B5714A;"></div>
+          <div class="cost-label">Ops & certs</div>
+        </div>
+        <div class="cost-amount">$8.60</div>
+        <div class="cost-sub">Packaging, shipping, certifications, platform fees, brand ops</div>
+      </div>
+
+      <div class="cost-item">
+        <div class="cost-item-header">
+          <div class="cost-dot" style="background: #2C2419;"></div>
+          <div class="cost-label">Our margin</div>
+        </div>
+        <div class="cost-amount">$15.10</div>
+        <div class="cost-sub">29% margin. Covers future product development, team, and reinvestment</div>
+      </div>
+
+      <div class="cost-item">
+        <div class="cost-item-header">
+          <div class="cost-dot" style="background: #8C8880;"></div>
+          <div class="cost-label">Tax</div>
+        </div>
+        <div class="cost-amount">$14.50</div>
+        <div class="cost-sub">Applicable sales tax, collected and remitted</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="philosophy">
+  <div class="philosophy-inner">
+    <h2>Why we show the math</h2>
+    <div class="philosophy-grid">
+      <div class="philosophy-item">
+        <h3>The industry hides it</h3>
+        <p>Most clothing brands mark up 5–10× from cost to retail. They don't disclose it because they don't have to. We think that's the wrong default.</p>
+      </div>
+      <div class="philosophy-item">
+        <h3>You can decide what's fair</h3>
+        <p>When you see a $52 tee, you shouldn't have to guess. With the full breakdown, you can judge for yourself whether the margin is reasonable.</p>
+      </div>
+      <div class="philosophy-item">
+        <h3>It makes us accountable</h3>
+        <p>Posting our cost structure publicly means we can't quietly raise margins or cut corners on materials. Transparency is a commitment, not just a feature.</p>
+      </div>
+      <div class="philosophy-item">
+        <h3>Recycled, not just organic</h3>
+        <p>Our cotton comes from post-industrial textile waste — GRS certified. Less water, less virgin fiber, and a supply chain story we're proud to put on the hang tag.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© Transparent — Made in the USA</span>
+  <span>Full cost breakdown updated each production run</span>
+</footer>
+
+</body>
+</html>

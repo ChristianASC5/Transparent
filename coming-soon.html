@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coming Soon — Transparent</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sand: #F5F1EB;
+    --bark: #2C2419;
+    --moss: #4A5E3A;
+    --clay: #B5714A;
+    --cream: #FBF8F3;
+    --stone: #8C8880;
+    --divider: rgba(44,36,25,0.12);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--bark);
+    min-height: 100vh;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 2.5rem;
+    border-bottom: 0.5px solid var(--divider);
+    background: var(--cream);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .wordmark {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+    color: var(--bark);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+    color: var(--stone);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .nav-links a.active {
+    color: var(--bark);
+  }
+
+  /* ── Hero ── */
+  .launch-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 85vh;
+  }
+
+  .hero-visual {
+    background: var(--sand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    position: relative;
+  }
+
+  .coming-soon-badge {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--stone);
+    border: 0.5px solid var(--divider);
+    padding: 0.4rem 0.8rem;
+  }
+
+  .tee-svg { width: 65%; max-width: 280px; opacity: 0.7; }
+
+  .hero-content {
+    padding: 4rem 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--moss);
+  }
+
+  .hero-content h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem;
+    line-height: 1.05;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-content .tagline {
+    font-size: 1rem;
+    color: var(--stone);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    max-width: 380px;
+  }
+
+  /* ── Waitlist form ── */
+  .waitlist-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 320px;
+    margin-bottom: 1.5rem;
+  }
+
+  .waitlist-form input[type="email"] {
+    padding: 0.875rem 1rem;
+    border: 0.5px solid var(--divider);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    color: var(--bark);
+    outline: none;
+    width: 100%;
+  }
+
+  .waitlist-form input[type="email"]::placeholder {
+    color: var(--stone);
+  }
+
+  .waitlist-form input[type="email"]:focus {
+    border-color: var(--bark);
+  }
+
+  .btn-primary {
+    display: block;
+    background: var(--bark);
+    color: var(--cream);
+    padding: 1rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 100%;
+    text-align: center;
+  }
+
+  .btn-primary:hover { background: #1a1510; }
+
+  .form-note {
+    font-size: 0.75rem;
+    color: var(--stone);
+    line-height: 1.5;
+  }
+
+  /* ── Cost preview ── */
+  .cost-preview {
+    padding: 5rem 2.5rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-header p {
+    color: var(--stone);
+    font-size: 0.95rem;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .cost-bar {
+    display: flex;
+    height: 8px;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    opacity: 0.5;
+    filter: blur(1px);
+  }
+
+  .cost-bar-segment {
+    height: 100%;
+  }
+
+  .cost-teaser-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--divider);
+    border: 0.5px solid var(--divider);
+    position: relative;
+  }
+
+  .cost-teaser-grid::after {
+    content: 'Full breakdown revealed at launch';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--stone);
+    background: rgba(251,248,243,0.7);
+    backdrop-filter: blur(3px);
+  }
+
+  .cost-teaser-item {
+    background: var(--cream);
+    padding: 1.5rem;
+  }
+
+  .cost-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 0.5rem;
+  }
+
+  .cost-amount-blur {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    filter: blur(6px);
+    user-select: none;
+    color: var(--bark);
+  }
+
+  /* ── Features/details ── */
+  .details {
+    background: var(--sand);
+    padding: 5rem 2.5rem;
+  }
+
+  .details-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .details h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .detail-item h3 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .detail-item p {
+    font-size: 0.875rem;
+    color: var(--stone);
+    line-height: 1.65;
+  }
+
+  /* ── Footer ── */
+  footer {
+    padding: 2rem 2.5rem;
+    border-top: 0.5px solid var(--divider);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--stone);
+  }
+
+  @media (max-width: 680px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .launch-hero { grid-template-columns: 1fr; }
+    .hero-visual { min-height: 40vh; }
+    .hero-content { padding: 2.5rem 1.5rem; }
+    .hero-content h1 { font-size: 2.2rem; }
+    .cost-teaser-grid { grid-template-columns: 1fr 1fr; }
+    .details-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="wordmark" href="transparent_brand_landing_page.html">Transparent</a>
+  <ul class="nav-links">
+    <li><a href="transparent_brand_landing_page.html">Shop</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="coming-soon.html" class="active">Coming Soon</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ──────────────────────────────────────────── -->
+<section class="launch-hero">
+  <div class="hero-visual">
+    <span class="coming-soon-badge">Coming soon</span>
+    <!-- Reuse same tee SVG from landing page -->
+    <svg class="tee-svg" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M60 20 L10 60 L35 80 L35 200 L165 200 L165 80 L190 60 L140 20 L120 40 Q100 50 80 40 Z"
+        fill="#D6CFC4" stroke="#BEB7AC" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M80 40 Q100 50 120 40" stroke="#BEB7AC" stroke-width="1" fill="none"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="eyebrow"><!-- EYEBROW: e.g. "Launching soon" --></div>
+    <h1><!-- HEADLINE: product name + launch hook --></h1>
+    <p class="tagline"><!-- TAGLINE: 2–3 sentences on what's coming and why it matters --></p>
+
+    <!-- ── WAITLIST FORM ── -->
+    <form class="waitlist-form" onsubmit="return false;">
+      <input type="email" placeholder="Your email address" autocomplete="email">
+      <button type="submit" class="btn-primary"><!-- CTA: e.g. "Join the waitlist" --></button>
+    </form>
+    <p class="form-note"><!-- FORM NOTE: e.g. "No spam. We'll notify you when pre-orders open." --></p>
+  </div>
+</section>
+
+<!-- ── COST BREAKDOWN TEASER ─────────────────────────── -->
+<section class="cost-preview">
+  <div class="section-header">
+    <h2><!-- SECTION TITLE: e.g. "The full breakdown, coming soon" --></h2>
+    <p><!-- SECTION SUBTEXT: tease the transparency angle --></p>
+  </div>
+
+  <!-- Blurred cost bar — intentionally obscured until launch -->
+  <div class="cost-bar">
+    <div class="cost-bar-segment" style="flex: 8.7; background: #6B7A52;"></div>
+    <div class="cost-bar-segment" style="flex: 5.1; background: #4A5E3A;"></div>
+    <div class="cost-bar-segment" style="flex: 8.6; background: #B5714A;"></div>
+    <div class="cost-bar-segment" style="flex: 14.6; background: #2C2419;"></div>
+  </div>
+
+  <!-- Blurred cost grid — teaser only -->
+  <div class="cost-teaser-grid">
+    <div class="cost-teaser-item">
+      <div class="cost-label">Materials</div>
+      <div class="cost-amount-blur">$8.70</div>
+    </div>
+    <div class="cost-teaser-item">
+      <div class="cost-label">Labour</div>
+      <div class="cost-amount-blur">$5.10</div>
+    </div>
+    <div class="cost-teaser-item">
+      <div class="cost-label">Ops</div>
+      <div class="cost-amount-blur">$8.60</div>
+    </div>
+    <div class="cost-teaser-item">
+      <div class="cost-label">Margin</div>
+      <div class="cost-amount-blur">$15.10</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRODUCT DETAILS ────────────────────────────────── -->
+<section class="details">
+  <div class="details-inner">
+    <h2><!-- SECTION TITLE: e.g. "What to expect" --></h2>
+    <div class="details-grid">
+      <div class="detail-item">
+        <h3><!-- Detail 1 title --></h3>
+        <p><!-- Detail 1 description --></p>
+      </div>
+      <div class="detail-item">
+        <h3><!-- Detail 2 title --></h3>
+        <p><!-- Detail 2 description --></p>
+      </div>
+      <div class="detail-item">
+        <h3><!-- Detail 3 title --></h3>
+        <p><!-- Detail 3 description --></p>
+      </div>
+      <div class="detail-item">
+        <h3><!-- Detail 4 title --></h3>
+        <p><!-- Detail 4 description --></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© Transparent — Made in the USA</span>
+  <span>Full cost breakdown updated each production run</span>
+</footer>
+
+</body>
+</html>
